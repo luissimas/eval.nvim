@@ -1,6 +1,7 @@
 local M = {}
 
 local defaults = {
+  prefix_char = "> ",
   filetype = {
     lua = {
       cmd = "lua -e"
