@@ -5,8 +5,3 @@ if !has('nvim-0.5')
 endif
 
 command! -range=% Eval lua require("eval").eval(<line1>, <line2>)
-vnoremap gr :Eval<CR>
-
-" Just a util map to reload the plugin
-command! EvalReload lua require("eval").reload()
-nnoremap <leader>r :EvalReload<CR>
