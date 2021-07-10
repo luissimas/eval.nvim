@@ -4,13 +4,13 @@ local defaults = {
   prefix_char = "> ",
   filetype = {
     lua = {
-      cmd = "lua -e"
+      cmd = "lua"
     },
     elixir = {
       cmd = "elixir -e"
     },
     javascript = {
-      cmd = "node -e"
+      cmd = "node"
     }
   }
 }

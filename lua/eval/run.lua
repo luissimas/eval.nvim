@@ -21,6 +21,7 @@ local function run(input, lines_)
 
   lines = lines_
   -- Creating the stream handles
+  local stdin = vim.loop.new_pipe(false)
   local stdout = vim.loop.new_pipe(false)
   local stderr = vim.loop.new_pipe(false)
 
@@ -29,29 +30,33 @@ local function run(input, lines_)
     return
   end
 
-  local fullcmd = vim.split(config.filetype[filetype].cmd, " ")
-  local cmd = fullcmd[1]
-  local arg = fullcmd[2]
+  local cmd = config.filetype[filetype].cmd
 
-  -- Spawning lua process and executing the input
-  Handle =
+  handle, pid =
     vim.loop.spawn(
     cmd,
     {
-      args = {arg .. " " .. input},
-      stdio = {nil, stdout, stderr}
+      stdio = {stdin, stdout, stderr}
     },
-    function()
-      stdout:read_stop()
+    function(code, signal)
+      -- closing streams on exit
       stderr:read_stop()
-      stdout:close()
+      stdout:read_stop()
       stderr:close()
-      Handle:close()
+      stdout:close()
+      stdin:close()
+      handle:close()
     end
   )
 
+  -- reading output from streams
   vim.loop.read_start(stderr, vim.schedule_wrap(onread))
   vim.loop.read_start(stdout, vim.schedule_wrap(onread))
+
+  -- writing the input
+  vim.loop.write(stdin, input)
+
+  stdin:shutdown()
 end
 
 return run
