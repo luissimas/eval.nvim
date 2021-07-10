@@ -6,9 +6,6 @@ local defaults = {
     lua = {
       cmd = "lua"
     },
-    elixir = {
-      cmd = "elixir -e"
-    },
     javascript = {
       cmd = "node"
     }
