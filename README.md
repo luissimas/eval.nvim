@@ -1,7 +1,7 @@
 # Eval.nvim
 A simple plugin to run your code in a repl and display the results as virtual text inside neovim.
 
-![demo](./assets/demo.gif)
+![demo](https://media3.giphy.com/media/mxsiX3xWxCkfA9eu6M/giphy.gif?cid=790b761138974af4258a2ff654a7f51116d14cd2f7e075c8&rid=giphy.gif)
 
 ## Requirements
 - Neovim >= 0.5
